@@ -1,0 +1,11 @@
+subset: a , b is a subset of "abc"
+powerset: all subsets
+substring: Contiguous part of string , eg. 'abcd' :- 'bc' is a substring 
+subsequence: May be non-contiguous but should be in order, eg:- 'abcd':- 'acd' is a subsequence but 'cad' is not because it is not in order/direction
+
+
+
+If they ask about powerset or subset or subsequence , then print subset only (dont get confused)
+IF the question asks to print only unique elements , then make use of set or map
+If the question asks to print in sorted manner , use map or use vector and then sort() method on vector will sort it
+

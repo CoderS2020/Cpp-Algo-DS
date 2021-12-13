@@ -1,0 +1,4 @@
+Two types: DFS, BFS
+
+DFS - 3 types: Preorder(root left right) , postorder(left right root), inorder(left, root,right)
+BFS - Travel level wise

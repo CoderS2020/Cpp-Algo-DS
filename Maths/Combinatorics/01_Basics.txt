@@ -1,0 +1,53 @@
+//1.nCr= n!/(n-r)! . r!
+nCr=nCn-r
+nCr=(n-1)C(r-1) + (n-1)nCr
+(x+y)^n=nC0 x^0y^n + nC1x^1y^n-1 +nC2x^2y^n-2 + ....+ nCn x^ny^0
+
+//2.
+Say you have a grid with lower left starting from (0,0) to (x,y)
+and you have 2 options on every grid - right or up.
+You can try on paper- at the end the no of ups will always be equal to y and no of rights will be equal to x (total x+y)
+So the answer is (x+y)Cx or (x+y)Cy
+
+Same for upper left to lower right
+
+//3.
+n coins flip
+probablity that m is heads
+nCm/2^n
+
+//4. 
+Pascal Triangle / Recurrence Formula
+nCr=(n-1)C(r-1) + (n-1)nCr
+
+//5.
+nC0+nC1+nC2+...=2^n
+Even terms = odd terms
+ie nC0+nC2+nC4+..=nC1+nC3+nC5.. = (2^n)/2 =2^n-1
+
+//Q Find no of intersection pts of diagonals in a polygon of n vertices 
+
+Ans 1. For all vertices find their connections and then from this subtract edges = nC2 - n 
+(from n points choose 2 pts to form connection - connection which forms edge of polygon but not diagonal)
+
+Ans 2. For a vertex its adjacent 2 vertices will always form an edge but never a diagonal
+but leaving these 2 adjacent vertices rest all vertices will form a diagonal so n * (n-3) [2 adjacent and 1 self]
+But when we consider for all edges then all diagonals will be counted twice hence divide it by two (a->b and b->a)
+hence final answer =n*(n-3)/2
+
+//Q Find no of intersection pts of diagonals in a polygon of n vertices given no three diagonals
+intersect in a polygon
+
+Ans] nC4
+Bcz intersection is formed only when 4 vertices are taken in consideration
+
+
+//Efficient Summations
+Q) C(n,0) + C(n+1,1) + C(n+2,2)... C(n+k,k)
+so sum is (n+k+1)C(k)
+
+Q) sum(C(n,i)*C(m,k-i)) over i in [0,k]
+Ans) So we can imagine 2 buckets, from one we choose nCi and other bucket mCk-i
+     So we can combine n+mCk [i+k-i=k and n+m]
+
+     

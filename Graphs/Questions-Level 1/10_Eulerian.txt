@@ -1,0 +1,13 @@
+We know hamiltonian path: Path in which every node is visited exactly once
+Eulerian Path: Path in which all the edges are visited exactly once
+Eulerian Circuit: Eulerian path in which you end up from where you started
+
+For Undirected Graphs:
+Eulerian circuit: degree of all vertices should be even otherwise it is not eulerian circuit
+Eulerian path: (n-2) nodes should have even degree and rest 2 nodes should have odd degree otherwise it is not eulerian path
+
+For Directed Graphs:
+Eulerian circuit:for every node Indegree == outdegree
+Eulerian path: (n-2) nodes should have indegree==outdegree and rest 2 nodes : for 1st node indegree=outdegree+1 and 2nd node outdegree=indegree+1
+
+If they do not match the above conditions then they are not of that type whatsoever.

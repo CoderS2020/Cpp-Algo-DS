@@ -1,0 +1,20 @@
+If you are given 3 different graphs ,
+never say that they are independent unless it is mentioned in the question.
+Instead always say that this is a disconnected graph with 3 components(number can be any)
+
+Even a single node can be called as a component
+
+Always write code for multiple components irrespective whether it is DFS or BFS
+
+Take a visitedArray and initialize it to 0
+for(int i=0;i<=n;i++){
+    if(!visitedArray[i]){ //check if the node is not visited
+        write code for DFS or BFS
+    }
+}
+
+
+To find the number of components count the no of times your code gets inside the if statement
+
+
+//Floyd Warshall remaining

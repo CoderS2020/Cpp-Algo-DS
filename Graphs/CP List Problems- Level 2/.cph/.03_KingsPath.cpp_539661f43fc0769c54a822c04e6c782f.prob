@@ -1,0 +1,1 @@
+{"name":"Local: 03_KingsPath","url":"e:\\C++,algo ds\\Graphs\\CP List Problems\\03_KingsPath.cpp","tests":[{"id":1630591144834,"input":"5 7 6 11\n3\n5 3 8\n6 7 11\n5 2 5","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\C++,algo ds\\Graphs\\CP List Problems\\03_KingsPath.cpp","group":"local","local":true}

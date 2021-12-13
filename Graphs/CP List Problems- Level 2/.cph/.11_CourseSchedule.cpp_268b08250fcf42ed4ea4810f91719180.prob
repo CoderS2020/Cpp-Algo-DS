@@ -1,0 +1,1 @@
+{"name":"Local: 11_CourseSchedule","url":"e:\\C++,algo ds\\Graphs\\CP List Problems- Level 2\\11_CourseSchedule.cpp","tests":[{"id":1630686970435,"input":"5 3\n1 2\n3 1\n4 5","output":"3 4 1 5 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\C++,algo ds\\Graphs\\CP List Problems- Level 2\\11_CourseSchedule.cpp","group":"local","local":true}
