@@ -1,4 +1,5 @@
 /*
+//https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle-1587115620/1
 //If at any floor the egg breaks then go downwards to find threshold floor
 //or if it does not break then go upwards 
 
@@ -65,7 +66,7 @@ int solve(int e,int f){
         if(t[e-1][k-1]!=-1) breaks=t[e-1][k-1];
         else breaks=solve(e-1,k-1);
 
-        if(t[e][f-k]!=-1) breaks=t[e][f-k];
+        if(t[e][f-k]!=-1) nobreak=t[e][f-k];
         else nobreak=solve(e,f-k);         
         
 

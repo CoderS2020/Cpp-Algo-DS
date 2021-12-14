@@ -16,8 +16,8 @@ int solve(int arr[],int i,int j){
 }
 
 Steps:
-1) Find values of i,j
-2) Find Base condition
+1) Find values of i,j (near left and right ends respectively )
+2) Find Base condition by considering the smallest valid input or first invalid input
 3) Move k from i to j
 4) Calculate tempAns and from it find final ans
 */

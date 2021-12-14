@@ -8,7 +8,7 @@ If there is a swap then compare beginning of first string with end of second str
 bool solve(string a , string b){
     if(a.compare(b)==0) return true;
 
-    if(a.length()<=1) return false; //on line 8 if it was length 1 but not same then return false
+    if(a.length()<=1) return false; //on line 9 if it was length 1 but same then return true, else if it is empty or single character(not equal) then return false
 
     int n=a.length();
     bool flag=false;
@@ -43,8 +43,8 @@ bool solve(string a , string b){
     bool flag=false;
 
     for(int i=1;i<n;i++){
-        if((solve(a.substr(0,i), b.substr(n-i,i)==true )
-        && solve(a.substr(i,n-i), b.substr(0,n-i)))     
+        if((solve(a.substr(0,i), b.substr(n-i,i))==true )
+        && solve(a.substr(i,n-i), b.substr(0,n-i) ) )     
             ||
         (solve(a.substr(0,i), b.substr(0,i))==true
         && solve(a.substr(i,n-i), b.substr(i,n-i))==true )

@@ -81,20 +81,28 @@ bool isPal(string s,int i,int j)
 }
 int util(string s,int i,int j)
 {
-   if(i>=j){return 0;}
-   if(dp[i][j]!=-1)
-   {
-       return dp[i][j];
-   }
-   if(isPal(s,i,j)){return dp[i][j]=0;}
+   if(i>=j)return 0;
+
+   if(dp[i][j]!=-1)return dp[i][j];
+
+   if(isPal(s,i,j))return dp[i][j]=0;
+
    int temp,mn=INT_MAX;
    for(int k=i;k<=j-1;k++)
    {
        int l,r;
-       if(dp[i][k]==-1){l=util(s,i,k);}
-       else{l=dp[i][k];}
-       if(dp[k+1][j]==-1){r=util(s,k+1,j);}
-       else{r=dp[k+1][j];}
+       if(dp[i][k]==-1){
+           l=util(s,i,k);
+       }
+       else{
+           l=dp[i][k];
+        }
+       if(dp[k+1][j]==-1){
+           r=util(s,k+1,j);
+       }
+       else{
+           r=dp[k+1][j];
+        }
        temp=l+r+1;
        mn=min(mn,temp);
    }
