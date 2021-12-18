@@ -2,7 +2,7 @@
 using namespace std;
 
 //There are generally two ways in which you can deal with array recursion, they are mentioned
-//in following 2 problems
+//in following 2 problems. Another way would be to use 2 outputs-> check here: https://leetcode.com/submissions/detail/584006181/
 
 // https://leetcode.com/problems/combination-sum/
 //Combination Sum
@@ -44,7 +44,7 @@ private:
             ans.push_back(ds); return ;
         }
         for(int i=ind;i<arr.size();i++){
-            if(i>ind && arr[i]==arr[i-1]) continue; //i> ind bcz if there is only last element that satisifes the condition
+            if(i>ind && arr[i]==arr[i-1]) continue; //i> ind or i!=ind bcz if there is only last element that satisifes the condition
             if(arr[i]>target) break;
             ds.push_back(arr[i]);
             findCombination(i+1,target-arr[i], arr,ans,ds);
@@ -53,7 +53,7 @@ private:
     }
 public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        sort(candidates.begin(),candidates.end());
+        sort(candidates.begin(),candidates.end()); //we sort it , to use it on line 47
         vector<vector<int>> ans;
         vector<int> ds;
         findCombination(0,target,candidates,ans,ds);
@@ -102,6 +102,7 @@ class Solution{
 
 
 //Subset Sums
+//https://practice.geeksforgeeks.org/problems/subset-sums2234/1#
 /*class Solution{
     public:
         void func(int ind,int sum,vector<int> & arr, int N,vector<int> &sumSubset){
@@ -153,6 +154,36 @@ public:
 //Permutaion Sequence
 //https://leetcode.com/problems/permutation-sequence/
 /*
+//Brute force
+O(n!*n)-> n! pemutations and deep copying n elements takes total n time 
+void permute(string a, int l, int r)
+{
+    // Base case
+    if (l == r)
+        cout<<a<<endl;
+    else
+    {
+        // Permutations made
+        for (int i = l; i <= r; i++)
+        {
+ 
+            // Swapping done
+            swap(a[l], a[i]);
+ 
+            // Recursion called
+            permute(a, l+1, r);
+ 
+            //backtrack
+            swap(a[l], a[i]);
+        }
+    }
+}
+//Important
+//Optimized: TC O(n*n)->one n to delete elements, SC O(n)
+Steps
+1)Find k by dividing prev k with factorial of number of unknown element
+2) Change values of k and fact according to sub problems
+
 class Solution{
     public:
         string getPermutation(int n,int k){
@@ -164,7 +195,7 @@ class Solution{
             }
             numbers.push_back(n);
             string ans="";
-            k=k-1;
+            k=k-1; //0 based indexing
             while(true){
                 ans=ans+to_string(numbers[k/fact]);
                 numbers.erase(numbers.begin()+k/fact);
@@ -232,6 +263,119 @@ class Solution{
         }
 };*/
 
+//N Queens
+//Brute force
+/*
+class Solution {
+public:
+    bool isSafe1(int row, int col, vector<string> board, int n) {
+        // check upper diagonal
+        int duprow = row;
+        int dupcol = col; 
+        
+        while(row >= 0 && col >= 0) {
+            if(board[row][col] == 'Q') return false;
+            row--;
+            col--;
+        }
+        
+        
+        col = dupcol; 
+        row = duprow;
+        while(col>=0) {
+            if(board[row][col] == 'Q') return false;
+            col--; 
+        }
+    
+        row = duprow;
+        col = dupcol; 
+        while(row<n && col>=0) {
+            if(board[row][col] == 'Q') return false;
+            row++;
+            col--; 
+        }
+        
+        return true; 
+    }
+public: 
+    void solve(int col, vector<string> &board, vector<vector<string>> &ans, int n) {
+        if(col == n) {
+            ans.push_back(board); 
+            return; 
+        }
+    
+        for(int row = 0;row<n;row++) {
+            if(isSafe1(row, col, board, n)) {
+                board[row][col] = 'Q'; 
+                solve(col+1, board, ans, n); 
+                board[row][col] = '.'; 
+            }
+        }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans; 
+        vector<string> board(n);
+        string s(n, '.'); 
+        for(int i = 0;i<n;i++) {
+            board[i] = s; 
+        }
+         
+        solve(0,board, ans, n); 
+        return ans; 
+    }
+    
+};
+*/
+
+//Optimized
+/*
+class Solution {
+
+public: 
+    void solve(int col, vector<string> &board, vector<vector<string>> &ans, 
+               vector<int> &leftRow, 
+               vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n) {
+        if(col == n) {
+            ans.push_back(board); 
+            return; 
+        }
+    
+        
+        for(int row = 0;row<n;row++) {
+            if(leftRow[row]==0 && lowerDiagonal[row + col] == 0 
+               && upperDiagonal[n-1 + col - row] == 0) {
+                
+                board[row][col] = 'Q'; 
+                leftRow[row] = 1; 
+                lowerDiagonal[row+col] = 1; 
+                upperDiagonal[n-1 + col - row] = 1;
+                solve(col+1, board, ans, leftRow, upperDiagonal, lowerDiagonal, n); 
+                board[row][col] = '.'; 
+                leftRow[row] = 0; 
+                lowerDiagonal[row+col] = 0; 
+                upperDiagonal[n-1 + col - row] = 0;
+            }
+        }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans; 
+        vector<string> board(n);
+        string s(n, '.'); 
+        for(int i = 0;i<n;i++) {
+            board[i] = s; 
+        }
+        vector<int> leftRow(n, 0), upperDiagonal(2 * n - 1, 0), lowerDiagonal(2 * n - 1, 0); 
+        solve(0,board, ans, leftRow, upperDiagonal, lowerDiagonal, n); 
+        return ans; 
+    }
+    
+};
+*/
+
+
+
 //Sudoku Solver
 /*
 class Solution{
@@ -270,6 +414,9 @@ class Solution{
 };
 */
 
+
+
+//M-coloring problem
 // https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/
 /*
 bool isSafe(int node,int color[],bool graph[101][101],int n, int col){
@@ -298,5 +445,64 @@ bool graphColoring(bool graph[101][101],int m,int N){
     int color[N]={0};
     if(solve(0,color,m,N,graph)) return true;
     return false;
+};
+*/
+
+//Rat in Maze
+/*
+class Solution{
+    void solve(int i, int j, vector<vector<int>> &a, int n, vector<string> &ans, string move, 
+    vector<vector<int>> &vis, int di[], int dj[]) {
+        if(i==n-1 && j==n-1) {
+            ans.push_back(move);
+            return; 
+        }
+        string dir = "DLRU"; 
+        for(int ind = 0; ind<4;ind++) {
+            int nexti = i + di[ind]; 
+            int nextj = j + dj[ind]; 
+            if(nexti >= 0 && nextj >= 0 && nexti < n && nextj < n && !vis[nexti][nextj] && a[nexti][nextj] == 1) {
+                vis[i][j] = 1; 
+                solve(nexti, nextj, a, n, ans, move + dir[ind], vis, di, dj);
+                vis[i][j] = 0; 
+            }
+        }
+        // downward
+        // if(i+1<n && !vis[i+1][j] && a[i+1][j] == 1) {
+        //     vis[i][j] = 1; 
+        //     solve(i+1, j, a, n, ans, move + 'D', vis);
+        //     vis[i][j] = 0; 
+        // }
+        
+        // // left
+        // if(j-1>=0 && !vis[i][j-1] && a[i][j-1] == 1) {
+        //     vis[i][j] = 1; 
+        //     solve(i, j-1, a, n, ans, move + 'L', vis);
+        //     vis[i][j] = 0; 
+        // }
+        
+        // // right 
+        // if(j+1<n && !vis[i][j+1] && a[i][j+1] == 1) {
+        //     vis[i][j] = 1; 
+        //     solve(i, j+1, a, n, ans, move + 'R', vis);
+        //     vis[i][j] = 0; 
+        // }
+        
+        // // upward
+        // if(i-1>=0 && !vis[i-1][j] && a[i-1][j] == 1) {
+        //     vis[i][j] = 1; 
+        //     solve(i-1, j, a, n, ans, move + 'U', vis);
+        //     vis[i][j] = 0; 
+        // }
+    }
+    public:
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        vector<string> ans;
+        vector<vector<int>> vis(n, vector<int> (n, 0)); 
+        int di[] = {+1, 0, 0, -1}; 
+        int dj[] = {0, -1, 1, 0}; 
+        if(m[0][0] == 1) solve(0,0,m,n, ans, "", vis, di, dj); 
+        return ans; 
+    }
 };
 */
