@@ -1,3 +1,5 @@
+//GCD has property that ax+by=gcd(a,b)
+
 //a,b,x,y,c are integers
 //Given a,b,c ; solve for x,y where ax+by=c
 
@@ -18,10 +20,10 @@ using namespace std;
 
 int gcd(int a,int b,int &x ,int &y){
    if(b==0){
-      //here a is gcd
+      //(ax+by=gcd(a,b)) and gcd(p,0)=p
       x=1;
       y=0;
-      return a;
+      return a; //gcd(p,0)=p so return gcd(a,b)=a
    }
    int x1,y1;
    int d=gcd(b,a%b,x1,y1);
@@ -32,7 +34,7 @@ int gcd(int a,int b,int &x ,int &y){
 
 
 /*
-Linear Diophantine Equation (ax+by=c)
+Linear Diophantine Equation (ax+by=c or x^2-y^2=z^2 ie. of same power)
 Degenerate Case: When a=b=0 (degenerate case). There are 2 sub cases
 a) when c=0, solutions are infinite
 b) when c!=0, solutions : 0
