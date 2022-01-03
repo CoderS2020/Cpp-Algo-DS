@@ -43,3 +43,7 @@ int main(){
 
    return 0;
 }
+
+//Note: When we are performing Xor operation in sliding window , so in order to move to next window by removing
+//the first element and adding next element for xor we do xor of first element in order to remove it since
+//a^a=0 (so when we xor it again it is removed)
